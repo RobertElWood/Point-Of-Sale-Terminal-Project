@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point of Sale Terminal", "Point of Sale Terminal.csproj", "{04BCA8F4-8E9B-4D70-9C9B-920E4DA82EE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04BCA8F4-8E9B-4D70-9C9B-920E4DA82EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BCA8F4-8E9B-4D70-9C9B-920E4DA82EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BCA8F4-8E9B-4D70-9C9B-920E4DA82EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BCA8F4-8E9B-4D70-9C9B-920E4DA82EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69531337-E82F-4B26-84F2-E3812C270CB2}
+	EndGlobalSection
+EndGlobal
