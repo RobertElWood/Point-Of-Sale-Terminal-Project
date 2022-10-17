@@ -34,7 +34,7 @@ namespace Point_of_Sale_Terminal
 
         public static bool AskToContinue()
         {
-            Console.WriteLine("Would you like to purchase anything else?? y/n");
+            Console.WriteLine("Would you like to purchase anything else? y/n");
             string input = Console.ReadLine().ToLower();
 
             if (input == "y")
