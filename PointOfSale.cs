@@ -9,8 +9,8 @@ namespace PointOfSale
 {
     public class POS
     {
-        public List< Inventory> ListOfInventory { get; set; } = new List <Inventory> { };
-        public Dictionary <int, Inventory> PurchasedItems { get; set; } = new Dictionary <int, Inventory>();
+        public List<Inventory> ListOfInventory { get; set; } = new List<Inventory> { };
+        public Dictionary<int, Inventory> PurchasedItems { get; set; } = new Dictionary<int, Inventory>();
 
         //public enum PayType
         //{
@@ -21,7 +21,7 @@ namespace PointOfSale
 
         public POS()
         {
-       
+
             Inventory game1 = new Inventory(Condition.Used, "Super Mario 64", Category.Games, 52);
             ListOfInventory.Add(game1);
             Inventory game2 = new Inventory(Condition.Used, "Crash Bandicoot", Category.Games, 32);
@@ -32,7 +32,7 @@ namespace PointOfSale
             ListOfInventory.Add(game4);
             Inventory game5 = new Inventory(Condition.New, "NBA2K", Category.Games, 20);
             ListOfInventory.Add(game5);
-            Inventory game6= new Inventory(Condition.New, "Fallout 2", Category.Games, 19);
+            Inventory game6 = new Inventory(Condition.New, "Fallout 2", Category.Games, 19);
             ListOfInventory.Add(game6);
             Inventory game7 = new Inventory(Condition.Used, "Pokemon Yellow", Category.Games, 100);
             ListOfInventory.Add(game7);
@@ -81,7 +81,7 @@ namespace PointOfSale
             int input2 = int.Parse(Console.ReadLine()); //needs error handling
 
             PurchasedItems.Add(input2, ListOfInventory[input]);
-            Console.WriteLine($"Congrats on purchasing: {input2}\tname: {ListOfInventory[input].Name}");
+            Console.WriteLine($"You've added: {input2} {ListOfInventory[input].Name} to cart.");
         }
 
         //Method to print receipt of purchase to the user.
@@ -91,18 +91,18 @@ namespace PointOfSale
             {
                 Console.WriteLine($"amount: {PurchasedItems.ElementAt(i).Key}name: {PurchasedItems.ElementAt(i).Value.Name}\tprice: {PurchasedItems.ElementAt(i).Value.Price}");
             }
-            int Total = 0;
+            double Total = 0;
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                int ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
                 Total += ItemPrice;
             }
             double Total2 = Math.Round(Total * 1.06, 2);
 
             Console.WriteLine($"Your subtotal is {Total} and your total after tax is {Total2}");
         }
-        
+
         //Method to let user select their preferred payment type.
         public void ChoosePaymentMethod()
         {
@@ -130,24 +130,26 @@ namespace PointOfSale
         }
 
         //Method for cash payment, calculates change for the user based on their input
-        public void CalculateChange() 
+        public void CalculateChange()
         {
-            int total = 0;
+            double total = 0;
 
-            double total2 = total * 1.06;
+
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                int ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
                 total += ItemPrice;
             }
 
+            double total2 = total * 1.06;
+
             Console.WriteLine("Your total is: " + "$" + total2);
-            Console.WriteLine("Please enter the amount of cash you'd like to pay with.");   
+            Console.WriteLine("Please enter the amount of cash you'd like to pay with.");
 
-            int input = int.Parse(Console.ReadLine()); //needs error handling
+            double input = double.Parse(Console.ReadLine()); //needs error handling
 
-            double change = Math.Round(total2 - input, 2);
+            double change = Math.Round(input - total2, 2);
 
             Console.WriteLine($"You paid ${input} in cash");
             Console.WriteLine($"Your change was: ${change}");
@@ -165,14 +167,14 @@ namespace PointOfSale
 
                 string input2 = Console.ReadLine();
 
-                bool isNumeric = int.TryParse(input2, out int creditnumber);
+                bool isNumeric = input2.Any(Char.IsDigit);
 
                 if (isNumeric == false)
                 {
                     Console.WriteLine("I'm sorry, you need to enter a number.");
                     continue;
                 }
-                else if (input2.Count() < 16)
+                else if (input2.Count() > 16 || input2.Count() < 16)
                 {
                     Console.WriteLine("Please enter your sixteen digit credit card number.");
                     continue;
