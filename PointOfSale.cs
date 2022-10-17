@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS
+namespace PointOfSale
 {
     public class POS
     {
