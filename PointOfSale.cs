@@ -9,16 +9,19 @@ namespace PointOfSale
 {
     public class POS
     {
+
+        //Property to create the List of our product for sale
         public List<Inventory> ListOfInventory { get; set; } = new List<Inventory> { };
+
+        //Property to store customers items selected to a separate list for receipt and payment handling later
         public Dictionary<int, Inventory> PurchasedItems { get; set; } = new Dictionary<int, Inventory>();
 
-        //public enum PayType
-        //{
-        //    Cash,
-        //    Credit,
-        //    Check
-        //}
 
+        //Multi Dimensional List - List<List<Qauntity>>, List<List<Item>>
+
+
+
+        //Constructor to populate or product list with actual product
         public POS()
         {
 
@@ -68,7 +71,7 @@ namespace PointOfSale
         {
             for (int i = 0; i < ListOfInventory.Count; i++)
             {
-                Console.WriteLine($"condition: {ListOfInventory[i].Condition}\tname: {ListOfInventory[i].Name}\tprice: {ListOfInventory[i].Price}\tdescription: {ListOfInventory[i].Description}");
+                Console.WriteLine($"{(i+1)+")",-4}Condition: {ListOfInventory[i].Condition, -5}Name: {ListOfInventory[i].Name, -49}Price: {ListOfInventory[i].Price,-5}Description: {ListOfInventory[i].Description}");
             }
         }
 
@@ -76,7 +79,7 @@ namespace PointOfSale
         public void Purchase()
         {
             Console.WriteLine("Which item would you like to purchase?");
-            int input = int.Parse(Console.ReadLine());  //needs error handling
+            int input = int.Parse(Console.ReadLine())-1;  //needs error handling
             Console.WriteLine("How many would you like to purchase?");
             int input2 = int.Parse(Console.ReadLine()); //needs error handling
 
