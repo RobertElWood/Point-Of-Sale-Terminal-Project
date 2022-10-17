@@ -33,7 +33,7 @@ namespace Point_of_Sale_Terminal
 
         public string Name { get; set; }
 
-        public int Price { get; set; }
+        public double Price { get; set; }
 
         public Category Description { get; set; }
 
@@ -43,12 +43,12 @@ namespace Point_of_Sale_Terminal
 
 
         //Constructor to initialize properties
-        public Inventory(Condition Condition, string Name, Category Description, int Price)
+        public Inventory(Condition Condition, string Name, Category Description, double Price)
         {
-            Name = Name;
-            Price = Price;
-            Description = Description;
-            Condition = Condition;
+            this.Name = Name;
+            this.Price = Price;
+            this.Description = Description;
+            this.Condition = Condition;
         }
 
 
