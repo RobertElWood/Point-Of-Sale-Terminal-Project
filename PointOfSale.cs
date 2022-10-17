@@ -1,12 +1,11 @@
-﻿using Point_of_Sale_Terminal;
+using Point_of_Sale_Terminal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS
-
+namespace PointOfSale
 {
     public class POS
     {
