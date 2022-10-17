@@ -34,22 +34,22 @@ namespace Point_of_Sale_Terminal
 
         public static bool AskToContinue()
         {
-            Console.WriteLine("YOU WANT MORE MOTHERFUCKA?! y/n");
+            Console.WriteLine("Would you like to purchase anything else?? y/n");
             string input = Console.ReadLine().ToLower();
 
             if (input == "y")
             {
-                Console.WriteLine("THAT'S CORRECT MOTHAFUCKA!");
+                Console.WriteLine("Okay, great!");
                 return true;
             }
             else if (input == "n")
             {
-                Console.WriteLine("Have a nice day! MOTHAFUCKA!");
+                Console.WriteLine("Thank you for stopping by!");
                 return false;
             }
             else
             {
-                Console.WriteLine("WHAT? MOTHAFUCKA!?");
+                Console.WriteLine("I didn't catch that.");
                 return AskToContinue();
             }
         }
