@@ -11,13 +11,9 @@ namespace PointOfSale
     {
 
         //Property to create the List of our product for sale
-        public List<Inventory> ListOfInventory { get; set; } = new List<Inventory> { };
-
-        //Property to store customers items selected to a separate list for receipt and payment handling later
-        public Dictionary<int, Inventory> PurchasedItems { get; set; } = new Dictionary<int, Inventory>();
-
-
-        //Multi Dimensional List - List<List<Qauntity>>, List<List<Item>>
+        public List<Inventory> ListOfInventory { get; set; } = new List<Inventory>();
+        public List<Inventory> PurchasedItems { get; set; } = new List<Inventory>();
+        public List<int> ItemQuantity { get; set; } = new List<int>();
 
 
 
@@ -45,6 +41,10 @@ namespace PointOfSale
             ListOfInventory.Add(game9);
             Inventory game10 = new Inventory(Condition.Used, "Soulcalibur II", Category.Games, 33);
             ListOfInventory.Add(game10);
+            Inventory game11 = new Inventory(Condition.Used, "Goldeneye 007", Category.Games, 89);
+            ListOfInventory.Add(game11);
+            Inventory game12 = new Inventory(Condition.Used, "Battletoads", Category.Games, 79);
+            ListOfInventory.Add(game12);
             Inventory console1 = new Inventory(Condition.Used, "Sega Dreamcast", Category.Consoles, 160);
             ListOfInventory.Add(console1);
             Inventory console2 = new Inventory(Condition.Used, "PlayStation 2", Category.Consoles, 155);
@@ -57,7 +57,7 @@ namespace PointOfSale
             ListOfInventory.Add(accessory1);
             Inventory accessory2 = new Inventory(Condition.Used, "Super Nintendo Entertainment System AC Adapter", Category.Accessories, 15);
             ListOfInventory.Add(accessory2);
-            Inventory accessory3 = new Inventory(Condition.Used, "NES Cleaning Kit", Category.Accessories, 138);
+            Inventory accessory3 = new Inventory(Condition.New, "NES Cleaning Kit", Category.Accessories, 138);
             ListOfInventory.Add(accessory3);
             Inventory accessory4 = new Inventory(Condition.Used, "Nintendo 64 Controller", Category.Accessories, 20);
             ListOfInventory.Add(accessory4);
@@ -66,14 +66,16 @@ namespace PointOfSale
 
         }
 
+
         //Method to print inventory to the user.
         public void PrintInventory()
         {
             for (int i = 0; i < ListOfInventory.Count; i++)
             {
-                Console.WriteLine($"{(i+1)+")",-4}Condition: {ListOfInventory[i].Condition, -5}Name: {ListOfInventory[i].Name, -49}Price: {ListOfInventory[i].Price,-5}Description: {ListOfInventory[i].Description}");
+                Console.WriteLine($"{(i+1)+")",-3}"+$"|±|Name: {ListOfInventory[i].Name, -49}|±|Price: ${ListOfInventory[i].Price,-7}|±|Condition: {ListOfInventory[i].Condition,-5}|±|Descrp: {ListOfInventory[i].Description}");
             }
         }
+
 
         //Method by which the user can purchase multiple items. Item qty and type saved to dictionary
         public void Purchase()
@@ -83,28 +85,31 @@ namespace PointOfSale
             Console.WriteLine("How many would you like to purchase?");
             int input2 = int.Parse(Console.ReadLine()); //needs error handling
 
-            PurchasedItems.Add(input2, ListOfInventory[input]);
-            Console.WriteLine($"You've added: {input2} {ListOfInventory[input].Name} to cart.");
+            ItemQuantity.Add(input2);
+            PurchasedItems.Add(ListOfInventory[input]);
+            Console.WriteLine($"You've added: {input2}x {ListOfInventory[input].Name} to cart.");
         }
+
 
         //Method to print receipt of purchase to the user.
         public void PrintReciept()
         {
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                Console.WriteLine($"amount: {PurchasedItems.ElementAt(i).Key}name: {PurchasedItems.ElementAt(i).Value.Name}\tprice: {PurchasedItems.ElementAt(i).Value.Price}");
+                Console.WriteLine($"Amount: {ItemQuantity.ElementAt(i)}Name: {PurchasedItems.ElementAt(i).Name}Price: {PurchasedItems.ElementAt(i).Price}");
             }
             double Total = 0;
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = ItemQuantity.ElementAt(i) * PurchasedItems.ElementAt(i).Price;
                 Total += ItemPrice;
             }
             double Total2 = Math.Round(Total * 1.06, 2);
 
             Console.WriteLine($"Your subtotal is {Total} and your total after tax is {Total2}");
         }
+
 
         //Method to let user select their preferred payment type.
         public void ChoosePaymentMethod()
@@ -132,6 +137,7 @@ namespace PointOfSale
 
         }
 
+
         //Method for cash payment, calculates change for the user based on their input
         public void CalculateChange()
         {
@@ -141,13 +147,13 @@ namespace PointOfSale
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = ItemQuantity.ElementAt(i) * PurchasedItems.ElementAt(i).Price;
                 total += ItemPrice;
             }
 
             double total2 = total * 1.06;
 
-            Console.WriteLine("Your total is: " + "$" + total2);
+            Console.WriteLine("Your total is: " + "$" + Math.Round(total2));
             Console.WriteLine("Please enter the amount of cash you'd like to pay with.");
 
             double input = double.Parse(Console.ReadLine()); //needs error handling
@@ -158,6 +164,7 @@ namespace PointOfSale
             Console.WriteLine($"Your change was: ${change}");
 
         }
+
 
         //Method which allows user to enter necessary credit card information (num, exp, CVV)
         public void PayWithCard()
@@ -235,6 +242,7 @@ namespace PointOfSale
                 runAgain = false;
             }
         }
+
 
         //Method which prompts user to enter their routing number if paying by check.
         public void PayWithCheck()

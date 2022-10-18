@@ -9,7 +9,7 @@ namespace Point_of_Sale_Terminal
 
 
 
-    //Enum is a constant list of values
+    //Enum for the category of product
     public enum Category
     {
         Games,
@@ -18,13 +18,13 @@ namespace Point_of_Sale_Terminal
 
     }
 
+
     //Enum for item condition
     public enum Condition
     {
         Used,
         New
     }
-
 
 
     //Setting properties for Enums
@@ -38,8 +38,6 @@ namespace Point_of_Sale_Terminal
         public Category Description { get; set; }
 
         public Condition Condition { get; set; }
-
-
 
 
         //Constructor to initialize properties
