@@ -80,15 +80,45 @@ namespace PointOfSale
         //Method by which the user can purchase multiple items. Item qty and type saved to dictionary
         public void Purchase()
         {
-            Console.WriteLine("Please enter the number of an item you'd like to purchase:\n");
+            int input = -1;
+            int input2 = -1;
 
-            int input = int.Parse(Console.ReadLine())-1;  //needs error handling RANGE and is numeric
+            Console.WriteLine("\nPlease enter the number of an item you'd like to purchase:\n");
 
-            Console.WriteLine($"\nYou've selected: {ListOfInventory[input].Name}\n");
+                try 
+                {
+                    input = int.Parse(Console.ReadLine()) - 1;
+
+                    Console.WriteLine($"\nYou've selected: {ListOfInventory[input].Name}\n");
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a number corresponding to the item you want.\n");
+                    Purchase();
+                }
+                catch (ArgumentOutOfRangeException f)
+                {
+                    Console.WriteLine("\nI'm sorry, we don't have an item in stock that matches that number. Please try again.\n");
+                    Purchase();
+                }
 
             Console.WriteLine("How many would you like to purchase?\n");
 
-            int input2 = int.Parse(Console.ReadLine()); //needs error handling
+            try
+            {
+                input2 = int.Parse(Console.ReadLine());
+            } 
+            catch (FormatException f)
+            {
+                Console.Write("\nI'm sorry. Please enter a valid number for the amount you'd like.\n");
+                Purchase();
+            }
+            
+            if (input2 < 0) 
+            {
+                Console.WriteLine("\nI'm sorry. Please enter a positive number. You can't buy -1 of something!\n");
+                Purchase();
+            }
 
             ItemQuantity.Add(input2);
             PurchasedItems.Add(ListOfInventory[input]);
@@ -128,19 +158,24 @@ namespace PointOfSale
             Console.WriteLine("3 - Check");
 
             Console.WriteLine();
-            int input = int.Parse(Console.ReadLine()); //needs error handling
+            string input = Console.ReadLine(); //needs error handling
 
-            if (input == 1)
+            if (input == "1")
             {
                 CalculateChange();
             }
-            else if (input == 2)
+            else if (input == "2")
             {
                 PayWithCard();
             }
-            else
+            else if (input == "3")
             {
                 PayWithCheck();
+            } 
+            else
+            {
+                Console.WriteLine("\nI'm sorry, please enter only 1, 2, or 3 depending on which payment type you'd like.\n");
+                ChoosePaymentMethod();
             }
 
         }
@@ -149,7 +184,10 @@ namespace PointOfSale
         //Method for cash payment, calculates change for the user based on their input
         public void CalculateChange()
         {
+            bool AskAgain = true;
+
             double total = 0;
+            double input = 0;
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
@@ -159,16 +197,37 @@ namespace PointOfSale
 
             double total2 = total * 1.06;
 
-            Console.WriteLine("\nYour total is: " + "$" + Math.Round(total2));
-            Console.WriteLine("\nPlease enter the amount of cash you'd like to pay with.\n");
+            while (AskAgain)
+            {
+                Console.WriteLine("\nYour total is: " + "$" + Math.Round(total2, 2));
+                Console.WriteLine("\nPlease enter the amount of cash you'd like to pay with.\n");
 
-            double input = double.Parse(Console.ReadLine()); //needs error handling
+                try
+                {
+                    input = double.Parse(Console.ReadLine());
+
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a valid payment number.\n");
+                    input = 0;
+                    continue;
+                }
+
+                if (input < total2)
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a number that allows you to pay your entire total.\n");
+                    input = 0;
+                    continue;
+                }
+
+                AskAgain = false;
+            }
 
             double change = Math.Round(input - total2, 2);
 
             Console.WriteLine($"\nYou paid ${input} in cash\n");
             Console.WriteLine($"Your change was: ${change}\n");
-
         }
 
 
@@ -262,16 +321,31 @@ namespace PointOfSale
 
                 string input6 = Console.ReadLine(); //error handling
 
-                bool isNumeric = int.TryParse(input6, out int checknumber);
+                bool isNumeric = input6.Any(Char.IsDigit);
 
                 if (isNumeric == false)
                 {
-                    Console.WriteLine("\nI'm sorry, please enter a number.");
+                    Console.WriteLine("\nI'm sorry, please enter a valid check number.");
                     continue;
                 }
                 else if (input6.Count() < 9 || input6.Count() > 9)
                 {
-                    Console.WriteLine("\nPlease enter your nine digit check number.");
+                    Console.WriteLine("\nPlease enter a check number that is exactly 9 digits.");
+                    continue;
+                } 
+                else if (input6.Any(Char.IsSymbol) == true) 
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a valid check number.");
+                    continue;
+                } 
+                else if (input6.Any(Char.IsLetter) == true) 
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a valid check number.");
+                    continue;
+                } 
+                else if (input6.Any(Char.IsPunctuation) == true)
+                {
+                    Console.WriteLine("\nI'm sorry, please enter a valid check number.");
                     continue;
                 }
 
