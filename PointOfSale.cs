@@ -80,14 +80,19 @@ namespace PointOfSale
         //Method by which the user can purchase multiple items. Item qty and type saved to dictionary
         public void Purchase()
         {
-            Console.WriteLine("Which item would you like to purchase?");
-            int input = int.Parse(Console.ReadLine())-1;  //needs error handling
-            Console.WriteLine("How many would you like to purchase?");
+            Console.WriteLine("Please enter the number of an item you'd like to purchase:\n");
+
+            int input = int.Parse(Console.ReadLine())-1;  //needs error handling RANGE and is numeric
+
+            Console.WriteLine($"\nYou've selected: {ListOfInventory[input].Name}\n");
+
+            Console.WriteLine("How many would you like to purchase?\n");
+
             int input2 = int.Parse(Console.ReadLine()); //needs error handling
 
             ItemQuantity.Add(input2);
             PurchasedItems.Add(ListOfInventory[input]);
-            Console.WriteLine($"You've added: {input2}x {ListOfInventory[input].Name} to cart.");
+            Console.WriteLine($"\nYou've added: {input2}x {ListOfInventory[input].Name} to your cart.");
         }
 
 
@@ -95,10 +100,10 @@ namespace PointOfSale
         public void PrintReciept()
         {
             Console.WriteLine();
-            Console.WriteLine("YOUR RECEIPT");
+            Console.WriteLine("YOUR RECEIPT: \n");
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                Console.WriteLine($"{i+1} Name: {PurchasedItems.ElementAt(i).Name}|�|Price: ${PurchasedItems.ElementAt(i).Price} QTY: {ItemQuantity.ElementAt(i)}\n");
+                Console.WriteLine($"{i+1}- |�|QTY: {ItemQuantity.ElementAt(i)}  |�|{PurchasedItems.ElementAt(i).Name}   |�|Price: ${PurchasedItems.ElementAt(i).Price}\n");
             }
             double Total = 0;
 
@@ -116,12 +121,13 @@ namespace PointOfSale
         //Method to let user select their preferred payment type.
         public void ChoosePaymentMethod()
         {
-            Console.WriteLine("What payment method would you like to use? Cash, Credit, or Check?");
+            Console.WriteLine("What payment method would you like to use? Cash, Credit, or Check?\n");
 
             Console.WriteLine("1 - Cash");
             Console.WriteLine("2 - Credit");
             Console.WriteLine("3 - Check");
 
+            Console.WriteLine();
             int input = int.Parse(Console.ReadLine()); //needs error handling
 
             if (input == 1)
@@ -145,8 +151,6 @@ namespace PointOfSale
         {
             double total = 0;
 
-
-
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
                 double ItemPrice = ItemQuantity.ElementAt(i) * PurchasedItems.ElementAt(i).Price;
@@ -155,15 +159,15 @@ namespace PointOfSale
 
             double total2 = total * 1.06;
 
-            Console.WriteLine("Your total is: " + "$" + Math.Round(total2));
-            Console.WriteLine("Please enter the amount of cash you'd like to pay with.");
+            Console.WriteLine("\nYour total is: " + "$" + Math.Round(total2));
+            Console.WriteLine("\nPlease enter the amount of cash you'd like to pay with.\n");
 
             double input = double.Parse(Console.ReadLine()); //needs error handling
 
             double change = Math.Round(input - total2, 2);
 
-            Console.WriteLine($"You paid ${input} in cash");
-            Console.WriteLine($"Your change was: ${change}");
+            Console.WriteLine($"\nYou paid ${input} in cash\n");
+            Console.WriteLine($"Your change was: ${change}\n");
 
         }
 
@@ -175,7 +179,7 @@ namespace PointOfSale
 
             while (runAgain)
             {
-                Console.WriteLine("Please enter your credit card number: ");
+                Console.WriteLine("\nPlease enter your credit card number: \n");
 
                 string input2 = Console.ReadLine();
 
@@ -183,16 +187,16 @@ namespace PointOfSale
 
                 if (isNumeric == false)
                 {
-                    Console.WriteLine("I'm sorry, you need to enter a number.");
+                    Console.WriteLine("\nI'm sorry, you need to enter a number.");
                     continue;
                 }
                 else if (input2.Count() > 16 || input2.Count() < 16)
                 {
-                    Console.WriteLine("Please enter your sixteen digit credit card number.");
+                    Console.WriteLine("\nPlease enter your sixteen digit credit card number.");
                     continue;
                 }
 
-                Console.WriteLine("Please enter your card's expiration month: ");
+                Console.WriteLine("\nPlease enter your card's expiration month: \n");
 
                 string input3 = Console.ReadLine();
 
@@ -200,16 +204,16 @@ namespace PointOfSale
 
                 if (isNumeric2 == false)
                 {
-                    Console.WriteLine("I'm sorry, you need to enter a number.");
+                    Console.WriteLine("\nI'm sorry, you need to enter a number.");
                     continue;
                 }
                 else if (int.Parse(input3) > 12 || int.Parse(input3) < 1)
                 {
-                    Console.WriteLine("Please enter a valid month, 1-12.");
+                    Console.WriteLine("\nPlease enter a valid month, 1-12.");
                     continue;
                 }
 
-                Console.WriteLine("Please enter your card's expiration year: ");
+                Console.WriteLine("\nPlease enter your card's expiration year: \n");
 
                 string input4 = Console.ReadLine();
 
@@ -217,27 +221,28 @@ namespace PointOfSale
 
                 if (isNumeric3 == false)
                 {
-                    Console.WriteLine("I'm sorry, you need to enter a number.");
+                    Console.WriteLine("\nI'm sorry, you need to enter a number.");
                     continue;
                 }
                 else if (int.Parse(input4) < 22)
                 {
-                    Console.WriteLine("I'm sorry, your card has expired. Please try a different card.");
+                    Console.WriteLine("\nI'm sorry, your card has expired. Please try a different card.");
                     continue;
                 }
-                Console.WriteLine("Please enter your card's CVV Code: ");
+                Console.WriteLine("\nPlease enter your card's CVV Code: \n");
+
                 string input5 = Console.ReadLine();
 
                 bool isNumeric4 = input5.Any(Char.IsDigit);
 
                 if (isNumeric4 == false)
                 {
-                    Console.WriteLine("I'm sorry, you need to enter a number.");
+                    Console.WriteLine("\nI'm sorry, you need to enter a number.");
                     continue;
                 }
                 else if (input5.Length < 3 || input5.Length > 3)
                 {
-                    Console.WriteLine("I'm sorry, your CVV is invalid. Please try another card.");
+                    Console.WriteLine("\nI'm sorry, your CVV is invalid. Please try another card.");
                     continue;
                 }
 
@@ -253,20 +258,20 @@ namespace PointOfSale
 
             while (runAgain)
             {
-                Console.WriteLine("Please enter your nine digit check number: ");
+                Console.WriteLine("\nPlease enter your nine digit check number: \n");
 
-                string input6 = Console.ReadLine();
+                string input6 = Console.ReadLine(); //error handling
 
                 bool isNumeric = int.TryParse(input6, out int checknumber);
 
                 if (isNumeric == false)
                 {
-                    Console.WriteLine("I'm sorry, please enter a number.");
+                    Console.WriteLine("\nI'm sorry, please enter a number.");
                     continue;
                 }
                 else if (input6.Count() < 9 || input6.Count() > 9)
                 {
-                    Console.WriteLine("Please enter your nine digit check number.");
+                    Console.WriteLine("\nPlease enter your nine digit check number.");
                     continue;
                 }
 
