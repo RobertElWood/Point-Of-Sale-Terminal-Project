@@ -94,9 +94,11 @@ namespace PointOfSale
         //Method to print receipt of purchase to the user.
         public void PrintReciept()
         {
+            Console.WriteLine();
+            Console.WriteLine("YOUR RECEIPT");
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                Console.WriteLine($"Amount: {ItemQuantity.ElementAt(i)}Name: {PurchasedItems.ElementAt(i).Name}Price: {PurchasedItems.ElementAt(i).Price}");
+                Console.WriteLine($"{i+1} Name: {PurchasedItems.ElementAt(i).Name}|±|Price: ${PurchasedItems.ElementAt(i).Price} QTY: {ItemQuantity.ElementAt(i)}\n");
             }
             double Total = 0;
 
@@ -107,7 +109,7 @@ namespace PointOfSale
             }
             double Total2 = Math.Round(Total * 1.06, 2);
 
-            Console.WriteLine($"Your subtotal is {Total} and your total after tax is {Total2}");
+            Console.WriteLine($"|±|Subtotal: ${Total}\n|±|Total: ${Total2}\n");
         }
 
 
@@ -194,14 +196,14 @@ namespace PointOfSale
 
                 string input3 = Console.ReadLine();
 
-                bool isNumeric2 = int.TryParse(input3, out int expMonth);
+                bool isNumeric2 = input3.Any(Char.IsDigit);
 
                 if (isNumeric2 == false)
                 {
                     Console.WriteLine("I'm sorry, you need to enter a number.");
                     continue;
                 }
-                else if (expMonth > 12 || expMonth < 1)
+                else if (int.Parse(input3) > 12 || int.Parse(input3) < 1)
                 {
                     Console.WriteLine("Please enter a valid month, 1-12.");
                     continue;
@@ -211,29 +213,29 @@ namespace PointOfSale
 
                 string input4 = Console.ReadLine();
 
-                bool isNumeric3 = int.TryParse(input4, out int expYear);
+                bool isNumeric3 = input4.Any(Char.IsDigit);
 
                 if (isNumeric3 == false)
                 {
                     Console.WriteLine("I'm sorry, you need to enter a number.");
                     continue;
                 }
-                else if (expYear < 22)
+                else if (int.Parse(input4) < 22)
                 {
                     Console.WriteLine("I'm sorry, your card has expired. Please try a different card.");
                     continue;
                 }
-
+                Console.WriteLine("Please enter your card's CVV Code: ");
                 string input5 = Console.ReadLine();
 
-                bool isNumeric4 = int.TryParse(input5, out int CVV);
+                bool isNumeric4 = input5.Any(Char.IsDigit);
 
                 if (isNumeric4 == false)
                 {
                     Console.WriteLine("I'm sorry, you need to enter a number.");
                     continue;
                 }
-                else if (input5.Count() < 3 || input5.Count() > 3)
+                else if (input5.Length < 3 || input5.Length > 3)
                 {
                     Console.WriteLine("I'm sorry, your CVV is invalid. Please try another card.");
                     continue;
