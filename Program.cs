@@ -52,22 +52,22 @@ namespace Point_of_Sale_Terminal
         //Method to prompt user to continue
         public static bool AskToContinue()
         {
-            Console.WriteLine("Would you like to purchase anything else? y/n");
+            Console.WriteLine("\nWould you like to purchase anything else? Y/N\n");
             string input = Console.ReadLine().ToLower();
 
             if (input == "y")
             {
-                Console.WriteLine("Okay, great!");
+                Console.WriteLine("\nOkay, great!");
                 return true;
             }
             else if (input == "n")
             {
-                Console.WriteLine("\nGreat, lets get you checked out!");
+                Console.WriteLine("\nGreat, lets get you checked out!\n");
                 return false;
             }
             else
             {
-                Console.WriteLine("I didn't catch that.");
+                Console.WriteLine("\nI didn't catch that.");
                 return AskToContinue();
             }
         }
@@ -75,22 +75,22 @@ namespace Point_of_Sale_Terminal
         //Method to prompt user if they want to shop again
         public static bool ShopAgain()
         {
-            Console.WriteLine("Would you like to shop again? y/n");
+            Console.WriteLine("\nWould you like to shop again? Y/N\n");
             string input = Console.ReadLine().ToLower();
 
             if (input == "y")
             {
-                Console.WriteLine("Okay, great!");
+                Console.WriteLine("\nOkay, great!");
                 return true;
             }
             else if (input == "n")
             {
-                Console.WriteLine("\nThank you for shopping at Retro Boys, the only video game store endorsed by Samuel L. Jackson, MF!");
+                Console.WriteLine("\nThank you for shopping at Retro Boys, the only video game store endorsed by Samuel L. Jackson!");
                 return false;
             }
             else
             {
-                Console.WriteLine("I didn't catch that.");
+                Console.WriteLine("\nI didn't catch that.");
                 return AskToContinue();
             }
 
