@@ -8,66 +8,37 @@ namespace Point_of_Sale_Terminal
         static void Main(string[] args)
         {
 
-
+            //Bool to prompt loop
             bool runAgain = true;
+            //New instance of POS class
             POS storeVisit = new POS();
-            string logo = @"
-                                 _____      _               ____                                                    
-                                |  __ \    | |             |  _ \                                               
-                                | |__) |___| |_ _ __ ___   | |_) | ___  _   _ ___                               
-                                |  _  // _ \ __| '__/ _ \  |  _ < / _ \| | | / __|                              
-                                | | \ \  __/ |_| | | (_) | | |_) | (_) | |_| \__ \                              
-                                |_|  \_\___|\__|_|  \___/  |____/ \___/ \__, |___/                              
-                                  _____                         _____ _  __/ |                              
-                                 / ____|                       / ____| ||___/                               
-                                | |  __  __ _ _ __ ___   ___  | (___ | |_ ___  _ __ ___                     
-                                | | |_ |/ _` | '_ ` _ \ / _ \  \___ \| __/ _ \| '__/ _ \                    
-                                | |__| | (_| | | | | | |  __/  ____) | || (_) | | |  __/                    
-                                 \_____|\__,_|_| |_| |_|\___| |_____/ \__\___/|_|  \___|                    ";
-            
-            string logo2 = @"
+            //Top Console Greeting
+            Logo Beauty = new Logo();            
 
-           ;
-       .==\""/==.                        
-      ((+) .  .:)
-      |`.-(o)-.'|
-      \/  \_/  \/                    ";
-            string logo3 = @"
 
-                		     ,---.U                      ________________
-                		 .==\""/==. 			|   |,""    `.|   | 
-                		((+) .  .:)	                |   /  SONY  \   |
-                		|`.-(o)-.'|			|O _\   />   /_  |    ___ _
-                		\/  \_/  \/			|_(_)'.____.'(_)_|  ("")__("")
-                					        [___|[=]__[=]|___]  //    \\
-                							\         ;
-                							 `-.___.-'   ";
-                
-            
-            
-            string format1 = "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞";
-            string formatGreeting2 = "¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤ Browse our products below ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤";
-            //Console.SetCursorPosition((Console.WindowWidth - logo.Length) / 2, Console.CursorTop);
-            Console.WriteLine(logo + logo3);
-
+            //Main store visit loop
             while (runAgain)
             {
+                //Beautify3 + repeated product list header
+                Console.WriteLine("∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞");
+                Console.WriteLine("¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤ Browse our products below ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤");
+                Console.WriteLine("∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞");
 
-                //Console.SetCursorPosition((Console.WindowWidth - greeting2.Length) / 2, Console.CursorTop
-                Console.WriteLine(format1);
-                Console.WriteLine(formatGreeting2);
-                Console.WriteLine(format1);
-
+                //Printing actual product inventory
                 storeVisit.PrintInventory();
-                Console.WriteLine();
+                Console.WriteLine();//Formatting
+                //Calling Purchase method to inquire with the user what they'd like to purchase TODO: Add something that says the user can just exit right away maybe?
                 storeVisit.Purchase();
-                Console.WriteLine();
+                Console.WriteLine();//Formatting
+                //Prompt user to go again
                 runAgain = AskToContinue();
             }
+            //Prompt user to select their pay type if they're done browsing
             storeVisit.ChoosePaymentMethod();
         }
 
 
+        //Method to prompt user to continue
         public static bool AskToContinue()
         {
             Console.WriteLine("Would you like to purchase anything else? y/n");
