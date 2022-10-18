@@ -11,16 +11,52 @@ namespace Point_of_Sale_Terminal
 
             bool runAgain = true;
             POS storeVisit = new POS();
-            string greeting1 = "Welcome to Retro Boys Gaming";
-            string greeting2 = "Have a look at our products below!\n";
-            Console.SetCursorPosition((Console.WindowWidth - greeting1.Length) / 2, Console.CursorTop);
-            Console.WriteLine(greeting1);
+            string logo = @"
+                                 _____      _               ____                                                    
+                                |  __ \    | |             |  _ \                                               
+                                | |__) |___| |_ _ __ ___   | |_) | ___  _   _ ___                               
+                                |  _  // _ \ __| '__/ _ \  |  _ < / _ \| | | / __|                              
+                                | | \ \  __/ |_| | | (_) | | |_) | (_) | |_| \__ \                              
+                                |_|  \_\___|\__|_|  \___/  |____/ \___/ \__, |___/                              
+                                  _____                         _____ _  __/ |                              
+                                 / ____|                       / ____| ||___/                               
+                                | |  __  __ _ _ __ ___   ___  | (___ | |_ ___  _ __ ___                     
+                                | | |_ |/ _` | '_ ` _ \ / _ \  \___ \| __/ _ \| '__/ _ \                    
+                                | |__| | (_| | | | | | |  __/  ____) | || (_) | | |  __/                    
+                                 \_____|\__,_|_| |_| |_|\___| |_____/ \__\___/|_|  \___|                    ";
+            
+            string logo2 = @"
+
+           ;
+       .==\""/==.                        
+      ((+) .  .:)
+      |`.-(o)-.'|
+      \/  \_/  \/                    ";
+            string logo3 = @"
+
+                		     ,---.U                      ________________
+                		 .==\""/==. 			|   |,""    `.|   | 
+                		((+) .  .:)	                |   /  SONY  \   |
+                		|`.-(o)-.'|			|O _\   />   /_  |    ___ _
+                		\/  \_/  \/			|_(_)'.____.'(_)_|  ("")__("")
+                					        [___|[=]__[=]|___]  //    \\
+                							\         ;
+                							 `-.___.-'   ";
+                
+            
+            
+            string format1 = "∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞";
+            string formatGreeting2 = "¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤ Browse our products below ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤";
+            //Console.SetCursorPosition((Console.WindowWidth - logo.Length) / 2, Console.CursorTop);
+            Console.WriteLine(logo + logo3);
 
             while (runAgain)
             {
 
-                Console.SetCursorPosition((Console.WindowWidth - greeting2.Length) / 2, Console.CursorTop);
-                Console.WriteLine(greeting2);
+                //Console.SetCursorPosition((Console.WindowWidth - greeting2.Length) / 2, Console.CursorTop
+                Console.WriteLine(format1);
+                Console.WriteLine(formatGreeting2);
+                Console.WriteLine(format1);
 
                 storeVisit.PrintInventory();
                 Console.WriteLine();
