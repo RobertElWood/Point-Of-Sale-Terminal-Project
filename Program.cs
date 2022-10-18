@@ -8,30 +8,34 @@ namespace Point_of_Sale_Terminal
         static void Main(string[] args)
         {
 
-
+            //Bool to prompt loop
             bool runAgain = true;
+            //New instance of POS class
             POS storeVisit = new POS();
-            string greeting1 = "Welcome to Retro Boys Gaming";
-            string greeting2 = "Have a look at our products below!\n";
-            Console.SetCursorPosition((Console.WindowWidth - greeting1.Length) / 2, Console.CursorTop);
-            Console.WriteLine(greeting1);
+            //Top Console Greeting
+            Logo Beauty = new Logo();            
 
+
+            //Main store visit loop
             while (runAgain)
             {
-
-                Console.SetCursorPosition((Console.WindowWidth - greeting2.Length) / 2, Console.CursorTop);
-                Console.WriteLine(greeting2);
-
+                //Item List header
+                Beauty.Logo2();
+                //Printing actual product inventory
                 storeVisit.PrintInventory();
-                Console.WriteLine();
+                Console.WriteLine();//Formatting
+                //Calling Purchase method to inquire with the user what they'd like to purchase TODO: Add something that says the user can just exit right away maybe?
                 storeVisit.Purchase();
-                Console.WriteLine();
+                Console.WriteLine();//Formatting
+                //Prompt user to go again
                 runAgain = AskToContinue();
             }
+            //Prompt user to select their pay type if they're done browsing
             storeVisit.ChoosePaymentMethod();
         }
 
 
+        //Method to prompt user to continue
         public static bool AskToContinue()
         {
             Console.WriteLine("Would you like to purchase anything else? y/n");
