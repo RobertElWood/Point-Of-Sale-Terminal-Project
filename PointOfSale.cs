@@ -21,7 +21,19 @@ namespace PointOfSale
         public POS()
         {
 
-            Inventory game1 = new Inventory(Condition.Used, "Super Mario 64", Category.Games, 52);
+            string relPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+          
+            string fixedRel = relPath.Substring(0, relPath.LastIndexOf("bin"));
+            
+            StreamReader reader = new StreamReader(fixedRel + @"\InventoryList.txt");
+
+            string textDump = reader.ReadToEnd();
+
+            LogItems(textDump);
+
+            //method to add inventory objects to inventory list from string
+
+            /*Inventory game1 = new Inventory(Condition.Used, "Super Mario 64", Category.Games, 52);
             ListOfInventory.Add(game1);
             Inventory game2 = new Inventory(Condition.Used, "Crash Bandicoot", Category.Games, 32);
             ListOfInventory.Add(game2);
@@ -62,7 +74,7 @@ namespace PointOfSale
             Inventory accessory4 = new Inventory(Condition.Used, "Nintendo 64 Controller", Category.Accessories, 20);
             ListOfInventory.Add(accessory4);
             Inventory accessory5 = new Inventory(Condition.Used, "Gameboy Game Shark", Category.Accessories, 12);
-            ListOfInventory.Add(accessory5);
+            ListOfInventory.Add(accessory5);*/
 
         }
 
@@ -350,6 +362,23 @@ namespace PointOfSale
                 }
 
                 runAgain = false;
+            }
+        }
+
+        //Method that converts items from text file into Inventory objects.
+        //Splits into a list of strings at each ';' in text file. Each ';' represents a new object
+        //Then splits to remove commas. Finally takes each string and adds it as a property for the new object.
+        public void LogItems(string textdump) 
+        {
+            List <string> lineItems = textdump.Split(';').ToList();
+
+            for (int i = 0; i < lineItems.Count()-1; i++)
+            {
+                string[] itemString = lineItems[i].Split(',');
+
+                Inventory newItem = new Inventory ((Condition)Enum.Parse(typeof(Condition), itemString[0]), itemString[1], (Category)Enum.Parse(typeof(Category), itemString[2]), double.Parse(itemString[3]));
+
+                ListOfInventory.Add(newItem);
             }
         }
     }

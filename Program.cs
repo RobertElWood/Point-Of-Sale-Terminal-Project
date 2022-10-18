@@ -11,8 +11,7 @@ namespace Point_of_Sale_Terminal
             bool shopAgain = true;
             //Bool to prompt asking to continue loop
             bool runAgain = true;
-                   
-            
+
             while (shopAgain)
             {
                 //New instance of POS class
