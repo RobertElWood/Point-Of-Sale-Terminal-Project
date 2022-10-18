@@ -11,14 +11,9 @@ namespace PointOfSale
     {
 
         //Property to create the List of our product for sale
-        public List<Inventory> ListOfInventory { get; set; } = new List<Inventory> { };
-
-
-        //Property to store customers items selected to a separate list for receipt and payment handling later
-        public Dictionary<int, Inventory> PurchasedItems { get; set; } = new Dictionary<int, Inventory>();
-
-
-        //Multi Dimensional List - List<List<Qauntity>>, List<List<Item>>
+        public List<Inventory> ListOfInventory { get; set; } = new List<Inventory>();
+        public List<Inventory> PurchasedItems { get; set; } = new List<Inventory>();
+        public List<int> ItemQuantity { get; set; } = new List<int>();
 
 
 
@@ -90,7 +85,8 @@ namespace PointOfSale
             Console.WriteLine("How many would you like to purchase?");
             int input2 = int.Parse(Console.ReadLine()); //needs error handling
 
-            PurchasedItems.Add(input2, ListOfInventory[input]);
+            ItemQuantity.Add(input2);
+            PurchasedItems.Add(ListOfInventory[input]);
             Console.WriteLine($"You've added: {input2}x {ListOfInventory[input].Name} to cart.");
         }
 
@@ -100,13 +96,13 @@ namespace PointOfSale
         {
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                Console.WriteLine($"amount: {PurchasedItems.ElementAt(i).Key}name: {PurchasedItems.ElementAt(i).Value.Name}\tprice: {PurchasedItems.ElementAt(i).Value.Price}");
+                Console.WriteLine($"Amount: {ItemQuantity.ElementAt(i)}Name: {PurchasedItems.ElementAt(i).Name}Price: {PurchasedItems.ElementAt(i).Price}");
             }
             double Total = 0;
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = ItemQuantity.ElementAt(i) * PurchasedItems.ElementAt(i).Price;
                 Total += ItemPrice;
             }
             double Total2 = Math.Round(Total * 1.06, 2);
@@ -151,13 +147,13 @@ namespace PointOfSale
 
             for (int i = 0; i < PurchasedItems.Count; i++)
             {
-                double ItemPrice = PurchasedItems.ElementAt(i).Key * PurchasedItems.ElementAt(i).Value.Price;
+                double ItemPrice = ItemQuantity.ElementAt(i) * PurchasedItems.ElementAt(i).Price;
                 total += ItemPrice;
             }
 
             double total2 = total * 1.06;
 
-            Console.WriteLine("Your total is: " + "$" + total2);
+            Console.WriteLine("Your total is: " + "$" + Math.Round(total2));
             Console.WriteLine("Please enter the amount of cash you'd like to pay with.");
 
             double input = double.Parse(Console.ReadLine()); //needs error handling
